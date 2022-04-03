@@ -1,6 +1,6 @@
 # Inspectrum/Inspectx
 
-## This is a [NeosModLoader](https://github.com/zkxs/NeosModLoader) mod that modifies the color and style of inspector panels based on a web hosted list of inspector titles.
+## This is a [NeosModLoader](https://github.com/zkxs/NeosModLoader) mod that modifies the color and style of inspector panels based on a web hosted list of inspector titles as well as gives the inspectors a more sleek default look.
 
 ### Installation: 
 #### Simply drop the dll from the latest release into your nml_mods folder
