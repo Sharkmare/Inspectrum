@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net4.7.2</TargetFramework>
-    <RootNamespace>Inspectrum</RootNamespace>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>Inspectx</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
-    <AssemblyName>Inspectrum</AssemblyName>
+    <AssemblyName>Inspectx</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>SymlinkedLibraries\0Harmony.dll</HintPath>
+      <HintPath>0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="BaseX">
       <HintPath>SymlinkedLibraries\BaseX.dll</HintPath>
@@ -18,13 +18,26 @@
       <HintPath>SymlinkedLibraries\CodeX.dll</HintPath>
     </Reference>
     <Reference Include="FrooxEngine">
-      <HintPath>SymlinkedLibraries\FrooxEngine.dll</HintPath>
+      <HintPath>FrooxEngine.dll</HintPath>
     </Reference>
     <Reference Include="NeosModLoader">
-      <HintPath>SymlinkedLibraries\NeosModLoader.dll</HintPath>
+      <HintPath>NeosModLoader.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Net.Http" Version="4.3.4"/>
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>
