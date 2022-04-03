@@ -28,39 +28,32 @@ namespace Inspectx
             {
                 WebClient client = new WebClient();
                 string downloadString = client.DownloadString("https://github.com/Sharkmare/SHCLD/raw/main/_inspector_title");
-                var strarray = downloadString.Split(Environment.NewLine.ToCharArray());
+                //Fetch string from web
+                string[] strarray = downloadString.Split(Environment.NewLine.ToCharArray());
+                //Split string based on newlines
                 Random random = new Random();
                 int i = random.Next(0, strarray.Length - 1);
+                //choose random option of array based on length with the last entry dropped as it will always be an empty newline due to windows filesystem adding one
                 downloadString = strarray[i];
 
                 __instance.Slot.AttachComponent<DuplicateBlock>();
-                
-                var image1 = __instance.Slot.GetComponentInChildren<FrooxEngine.UIX.Image>();
-                var image2 = image1.Slot[0].GetComponentInChildren<FrooxEngine.UIX.Image>();
-                var image3 = image1.Slot[1].GetComponentInChildren<FrooxEngine.UIX.Image>();
+                //Blocks duplication by existing on object root.
+
+                FrooxEngine.UIX.Image image1 = __instance.Slot.GetComponentInChildren<FrooxEngine.UIX.Image>();
+                FrooxEngine.UIX.Image image2 = image1.Slot[0].GetComponentInChildren<FrooxEngine.UIX.Image>();
+                FrooxEngine.UIX.Image image3 = image1.Slot[1].GetComponentInChildren<FrooxEngine.UIX.Image>();
+                //The above will break if the inspector hierarchy is ever modified as it expects 2 children beneath the first images slot.
+                //Slot[0] is equal to GetChild 0 in Logix
                 image1.Tint.Value = color.Black;
-                
-                var geen = color.Black;
-                geen = geen.SetR(0.5f);
-                geen = geen.SetG(0.2f);
-                geen = geen.SetB(1f);
-                geen = geen.SetA(.25f);
 
-                var gren = color.Black;
-                gren = gren.SetR(.2f);
-                gren = gren.SetG(1f);
-                gren = gren.SetB(.2f);
-                gren = gren.SetA(.25f);
+                //Redid the color definitions, thanks badhaloninja.
+                color geen = new color(.5f,.2f,1f,.25f);
+                color gren = new color(.2f,1f,.2f,.25f);
+                color dogman = new color(1f,1f,.2f,.25f);
 
-                var dogman = color.Black;
-                dogman = dogman.SetR(1f);
-                dogman = dogman.SetG(1f);
-                dogman = dogman.SetB(.2f);
-                dogman= dogman.SetA(.25f);
-
-                var gree = color.Gray;
+                color gree = color.Gray;
                 gree  = gree.SetA(.25f);
-                var dgree = color.Gray;
+                color dgree = color.Gray;
                 dgree = dgree.SetA(.5f);
 
                 switch (downloadString)
@@ -88,11 +81,14 @@ namespace Inspectx
 
                 var doul = __instance.Slot.AttachComponent<DestroyOnUserLeave>();
                 doul.TargetUser.User.Value = __result.Slot.LocalUser.ReferenceID;
+                //.Localuser gives us the instantiating user "ourselves"
+                
                 var NeosUIStyle = __instance.Slot.AttachComponent<NeosUIStyle>();
 
 
                 NeosUIStyle.Color.Value = color.Black;
                 NeosUIStyle.UserParentedColor.Value = color.Black;
+                //This sets the regular unparented color and parented color of the base neus ui panel
                 
                 __result.Style = NeosUIStyle;
                 __result.Color = __result.Color.SetA(0f);
@@ -100,9 +96,9 @@ namespace Inspectx
                     __result.MarkChangeDirty();
                     __result.Title = downloadString; // Title gets set after setup finishes so this needs to run after it gets set
                     __result.Slot.PersistentSelf = false;
-                    __result.Slot.Name = downloadString;
-                    __result.Thickness.Value = 0.005f;
-                    __result.ShowHandle.Value = false;
+                    //__result.Slot.Name = downloadString; //Uncomment to allow names to also change, comment out for compatibillity with Ghosts punch and the kitchen gun
+                    __result.Thickness.Value = 0.005f; //Sleeker.
+                    __result.ShowHandle.Value = false; //SLEEEKER!
                 });
             }
         }
